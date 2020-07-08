@@ -15,12 +15,12 @@ import java.util.List;
  */
 public class BaseProvider {
 
-    @DataProvider(name = "test")
+    @DataProvider(name = "getUser")
     public Iterator<Object[]> isSignedTest() throws IOException {
         List<String> lables = new ArrayList<String>();
         lables.add("0级");
         //lables.add("1级");
-        ArrayList<Object[]> testdata = ExcelUitls.getTestData(ExcelConstant.test, "test", lables);
+        ArrayList<Object[]> testdata = ExcelUitls.getTestData(ExcelConstant.user, "getUser", lables);
         return testdata.iterator();
     }
 }

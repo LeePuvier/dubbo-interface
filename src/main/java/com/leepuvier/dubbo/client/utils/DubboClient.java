@@ -114,20 +114,27 @@ public class DubboClient {
         reference.setRetries(this.retries);
         reference.setInterface(this.interfaceName);
         reference.setGeneric(this.generi);
+
         ReferenceConfigCache cache = ReferenceConfigCache.getCache();
         GenericService genericService = (GenericService)cache.get(reference);
+
         if (genericService == null) {
             cache.destroy(reference);
             throw new IllegalStateException("========service unavailable========");
         } else {
-            return parameterType == null ? genericService.$invoke(methodName, new String[0], new Object[0]) : genericService.$invoke(methodName, parameterType.split(","), params.values().toArray());
+
+            if (params == null){
+                return parameterType == null ? genericService.$invoke(methodName, new String[0], new Object[0]) : genericService.$invoke(methodName, parameterType.split(","), null);
+            }else {
+                return parameterType == null ? genericService.$invoke(methodName, new String[0], new Object[0]) : genericService.$invoke(methodName, parameterType.split(","), params.values().toArray());
+            }
         }
     }
 
     static {
         applicationConfig.setName("Dubbo-Client");
-        applicationConfig.setOwner("KaKa.Lo");
-        applicationConfig.setOrganization("KaKa.Lo");
+        applicationConfig.setOwner("LeePuvier");
+        applicationConfig.setOrganization("LeePuvier");
     }
 
     public static class RegistryConfigFactory {

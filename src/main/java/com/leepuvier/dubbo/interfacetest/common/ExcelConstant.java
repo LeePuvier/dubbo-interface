@@ -7,5 +7,5 @@ package com.leepuvier.dubbo.interfacetest.common;
  */
 public interface ExcelConstant {
 
-    public String test = "src/main/resources/caseFiles/test.xlsx";
+    public String user = "src/main/resources/caseFiles/User.xlsx";
 }
