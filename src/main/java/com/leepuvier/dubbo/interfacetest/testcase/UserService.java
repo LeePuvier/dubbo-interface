@@ -1,12 +1,15 @@
 package com.leepuvier.dubbo.interfacetest.testcase;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.leepuvier.dubbo.client.utils.DubboClient;
 import com.leepuvier.dubbo.interfacetest.common.BaseProvider;
+import com.leepuvier.dubbo.interfacetest.utils.DataUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.LinkedHashMap;
@@ -38,11 +41,16 @@ public class UserService {
         Map reponse = (Map) dubboClient.call(params.get("method").toString(), params.get("paraType").toString(), paraValues);
         log.info("接口实际返回信息为：" + reponse.toString());
 
+        System.out.println("接口实际返回信息为：" + JSON.toJSONString(reponse));
+
+        //期望接口返回
+        String expectResponse = params.get("expectResponse").toString();
+        //实际接口放回
+        String actResponse = JSON.toJSONString(reponse);
         //对比接口实际返回与预期返回
+        Assert.assertTrue(DataUtils.compareJsonResult(actResponse, expectResponse));
 
-
-
-        //对比接口实际返回与数据信息
+        //TODO：对比接口实际返回与数据信息
     }
 
 
