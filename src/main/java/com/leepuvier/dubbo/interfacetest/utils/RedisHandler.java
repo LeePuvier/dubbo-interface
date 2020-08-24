@@ -21,6 +21,7 @@ public class RedisHandler {
 
     @Resource
     RedisTemplate redisTemplate;
+
     public long ttl(String key) {
         return redisTemplate.getExpire(key);
     }

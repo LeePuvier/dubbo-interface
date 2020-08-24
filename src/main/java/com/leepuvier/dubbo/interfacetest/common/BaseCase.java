@@ -6,6 +6,7 @@ package com.leepuvier.dubbo.interfacetest.common;
  * @ContentUse :
  */
 
+import com.leepuvier.dubbo.interfacetest.Entry;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 

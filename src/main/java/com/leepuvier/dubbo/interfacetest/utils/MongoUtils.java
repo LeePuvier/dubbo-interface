@@ -28,7 +28,7 @@ import java.util.Map;
 public class MongoUtils {
 
     private static String  host="127.0.0.1";
-    private static int port = 20000;
+    private static int port = 27017;
     private static String user="test";
     private static String pwd="test";
     private static String datebase="test";

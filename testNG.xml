@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Dubbo InterfaceTest" parallel="methods" thread-count="2">
+
+    <parameter name="serviceEnv" value="https://capital-testing4.wecash.net"/>
+
+    <test name="UserServiceTest" preserve-order="true">
+        <classes>
+            <class name="com.leepuvier.dubbo.interfacetest.testcase.UserServiceGetUserTest">
+                <methods>
+                    <include name="getUserByDb" />
+                    <!--<include name="getUserByJdbcTemplate" />-->
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <listeners>
+        <listener class-name="com.leepuvier.dubbo.interfacetest.utils.ExtentTestNGIReporterListener" />
+        <!--<listener class-name="com.wecash.http.utils.ExtentTestNgFormatter" />-->
+    </listeners>
+</suite>

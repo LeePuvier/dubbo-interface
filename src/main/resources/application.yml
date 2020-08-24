@@ -1,7 +1,60 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useSSL=false&&charset=utf8&&loc=Asia%2FShanghai
+    username: root
+    password: 123123123
+    name: test
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    druid:
+      # 初始化大小，最小，最大
+      initial-size: 5
+      minIdle: 5
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+
+      # 如果运行时报错 java.lang.ClassNotFoundException: org.apache.log4j.Priority
+      # 则导入 log4j 依赖即可
+      # 配置监控统计拦截的filters, stat：监控统计、log4j：日志记录、wall:防御sql注入
+      filters: stat,wall,log4j
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergesql=true;druid.stat.slowSqlMillis=500
+      # 监控页面账号密码
+      stat-view-servlet:
+        login-username: admin
+        login-password: admin
+
   redis:
-    db: 0
+    database: 0
     host: 127.0.0.1
     port: 6379
     password: 123456
-    timeout: 3000ms
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1ms
+        #最大空闲
+        max-idle: 8
+        #最小空闲ap
+        min-idle: 0
+    timeout: 10000ms
+
+server:
+  port: 8099
